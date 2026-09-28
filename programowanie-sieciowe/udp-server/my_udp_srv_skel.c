@@ -47,7 +47,19 @@ ssize_t get_word_end(const unsigned char *buf, const size_t len) {
     return -1;
 }
 
+bool is_palindrome(const unsigned char *buf, const size_t len) {
+    if (len == 0) return false;
 
+    const unsigned char *p = buf;
+    const unsigned char *q = buf + len - 1;
+
+    while (p < q) {
+        if (*p != *q && *p != *q - 32) return false;
+        p++; q--;
+    }
+
+    return true;
+}
 
 ssize_t get_response(unsigned char *buf, size_t len) {
     if (len >= 2 && buf[len - 2] == '\r' && buf[len - 1] == '\n') {
